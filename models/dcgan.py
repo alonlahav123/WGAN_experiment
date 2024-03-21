@@ -65,6 +65,10 @@ class DCGAN_G(nn.Module):
 
         main = nn.Sequential()
         # input is Z, going into a convolution
+
+        main.add_module('encoder:{0}-{1}:convt'.format(nz, cngf),
+                        nn.ConvTranspose2d(nc, nz, 1, 1, 0, bias=False))
+
         main.add_module('initial:{0}-{1}:convt'.format(nz, cngf),
                         nn.ConvTranspose2d(nz, cngf, 4, 1, 0, bias=False))
         main.add_module('initial:{0}:batchnorm'.format(cngf),
